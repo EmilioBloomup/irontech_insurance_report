@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_modulo_cessione_credito" model="ir.actions.report">
+            <field name="name">Modulo di Cessione di Credito</field>
+            <field name="model">insurance.lead</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">irontech_insurance_report.report_modulo_cessione_credito2</field>
+            <field name="report_file">irontech_insurance_report.report_modulo_cessione_credito</field>
+            <field name="print_report_name">('Modulo Cessione Credito - %s' % (object.lead_code))</field>
+            <field name="binding_model_id" ref="insurance_app.model_insurance_lead" />
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="insurance_report_insurance_lead_extention_form_view" model="ir.ui.view">
+            <field name="name">Add operative office</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='vat']" position="after">
+                    <field name="operative_office" widget="many2one" attrs="{'invisible': [('is_company','=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

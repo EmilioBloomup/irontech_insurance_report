@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_modulo_cessione_credito">
+            <t t-set="o" t-value="doc" />
+            <t t-call="web.external_layout">
+                <style>
+                    .page{
+                    font-size:15px;
+                    }
+                    .borderline{
+                    border: 1px solid black !important;
+                    }
+                    .background{
+                    background-color: #C0C0C0;
+                    }
+                    .center {
+                    text-align:center;
+                    font-weight: bold;
+                    }
+                    .spanname{
+                    font-weight:bold;
+                    }
+                    .pad{
+                    padding-left:5px;
+                    }
+                </style>
+                <div class="page">
+                    <div class="oe_structure" />
+                    <div style="margin-bottom:30px" class="center">
+                        <strong class="signature">
+                            ATTO DI CESSIONE DEL CREDITO
+                        </strong>
+                        <br />
+                        <br />
+                        Tra </div>
+                    <div id="introduction">
+                        <p> Il/La sottoscritto/a <t t-if="o.insured_name">
+                                <span t-field="o.insured_name" />
+                            </t>
+                            <t
+                                t-if="not o.insured_name">
+                                ______________________
+                            </t>
+                            , in proprio / in qualità di legale rappresentante di
+                            _______________________, nato/a _______________________ il
+                            ______________________ , residente in <t t-if="o.insured_id.city">
+                                <span t-field="o.insured_id.city" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.city">
+                                ____________________
+                            </t>
+                            via <t t-if="o.insured_id.address">
+                                <span t-field="o.insured_id.address" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.address">
+                                ____________________
+                            </t>
+                            , CAP <t t-if="o.insured_id.cap">
+                                <span t-field="o.insured_id.cap" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.cap">
+                                ____________________
+                            </t>
+                            <t
+                                t-if="o.insured_id.partner_id.is_company"> P.IVA <t
+                                    t-if="o.insured_id.partner_id.vat">
+                                    <span t-field="o.insured_id.vat" />
+                                </t>
+                                <t
+                                    t-if="not o.insured_id.partner_id.vat">
+                                    ________________________
+                                </t>
+                            </t>
+                            <t
+                                t-if="not o.insured_id.partner_id.is_company"> C.F. <t
+                                    t-if="o.insured_id.cf">
+                                    <span t-field="o.insured_id.cf" />
+                                </t>    
+                            <t
+                                    t-if="not o.insured_id.cf">
+                                    ___________________________
+                                </t>
+
+                            </t>
+                            , assicurato con la compagnia <t t-if="o.insurance_company_id">
+                                <span t-field="o.insurance_company_id.name" />
+                            </t>
+                            <t
+                                t-if="not o.insurance_company_id">
+                            ____________________________________
+                            </t>
+                            di seguito denominato "Cedente". </p>
+                    </div>
+                    <div class="center">
+                        E
+                    </div>
+                    <br />
+                    <br />
+                    <div id="company_info">
+                        <p>
+                            <span t-field="o.company_id.name" /> , con sede legale in <span
+                                t-field="o.company_id.street" />
+                                <span
+                                t-field="o.company_id.street2" /> - <span
+                                t-field="o.company_id.city" /> , e sede operativa in <t
+                                t-if="o.company_id.partner_id.operative_office">
+                                <span t-field="o.company_id.partner_id.operative_office.street" />
+                                <span
+                                    t-field="o.company_id.partner_id.operative_office.street2" /> - <span
+                                    t-field="o.company_id.partner_id.operative_office.city" />
+                            </t>
+                                <t
+                                t-if="not o.company_id.partner_id.operative_office">
+                                <span
+                                    t-field="o.company_id.street" />
+                                <span
+                                    t-field="o.company_id.street2" /> - <span
+                                    t-field="o.company_id.city" />
+                            </t>,
+                            PEC <span
+                                t-field="o.company_id.email"></span>, C.F./P.IVA <span
+                                t-field="o.company_id.vat" />, in persona del Legale Rappresentante
+                            protempore, di seguito denominata "Cessionario". </p>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="center">
+                        PREMESSO CHE
+                    </div>
+                    <br />
+                    <br />
+                    <div id="conditions">
+                        <ol>
+                            <li> Il veicolo di proprietà del Cedente targato <t
+                                    t-if="o.vehicle_plate">
+                                    <span t-field="o.vehicle_plate" />
+                                </t>
+                                <t
+                                    t-if="not o.vehicle_plate">
+                                    __________________________
+                                </t>
+                                è rimasto danneggiato per danni derivati da eventi
+                                atmosferici/grandine, in un sinistro occorso in data <t
+                                    t-if="o.accident_date">
+                                    <span t-field="o.accident_date"
+                                        t-field-options='{"format": "dd-MM-yyyy"}' /> ora <span
+                                        t-field="o.accident_date"
+                                        t-field-options='{"format": "hh:mm"}' />
+                                </t>
+                                <t
+                                    t-if="not o.accident_date">
+                                    __________________________ ora ___________
+                                </t>
+                                e luogo __________________________; </li>
+
+                            <li>
+                                <p> Avendo il Cedente subito danni al proprio veicolo subito danni
+                                    al proprio veicolo, a fronte del quale lo stesso vanta un
+                                    credito nei confronti della compagnia assicuratrice <t
+                                        t-if="o.insurance_company_id">
+                                        <span t-field="o.insurance_company_id.name" />
+                                    </t>
+                            <t
+                                        t-if="not o.insurance_company_id">
+                                    ____________________________________
+                                    </t>
+                                    per il risarcimento dei danni conseguiti; </p>
+                            </li>
+                            <li>
+                                <p>Il Cedente con il presente atto commissiona al Cessionario
+                                    l’esecuzione delle riparazioni sul proprio veicolo, resesi
+                                    necessarie a causa del sinistro predetto ed è a conoscenza che
+                                    la carrozzeria <t t-if="o.body_repair_shop_id">
+                                        <span t-field="o.body_repair_shop_id.name" /> con sede in <span
+                                            t-field="o.body_repair_shop_id.street" /><span
+                                            t-field="o.body_repair_shop_id.street2" /> - <span
+                                            t-field="o.body_repair_shop_id.city" />
+                                    </t>
+                                    <t
+                                        t-if="not o.body_repair_shop_id">
+                                        __________________________
+                                    </t>
+                                    è stata incaricata dal Cessionario di eseguire la riparazione
+                                    del suddetto veicolo. </p>
+                            </li>
+                        </ol>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="center">
+                        SI CONVIENE E STIPULA QUANTO SEGUE
+                    </div>
+                    <br />
+                    <br />
+                    <div id="terms">
+                        <ol>
+                            <li>
+                                Il Cedente con il presente atto cede irrevocabilmente il suddetto
+                                credito al Cessionario e
+                                autorizza la compagnia assicuratrice ad effettuare il pagamento
+                                dell’indennizzo/risarcimento, spettante allo stesso, direttamente al
+                                Cessionario.
+                            </li>
+                            <li>
+                                Il risarcimento dei danni comprende l’insieme degli oneri per le
+                                riparazioni eseguite;
+                            </li>
+                            <li>
+                                Il Cessionario dichiara che ad avvenuta liquidazione dell’intero
+                                importo dovutole, nulla più
+                                avrà a pretendere nei confronti del Cedente;
+                            </li>
+                            <li>
+                                Ove, per qualsivoglia motivo, si manifestasse l’impossibilità di
+                                recupero
+                                dell’indennizzo/risarcimento nei confronti della compagnia di
+                                assicurazione il cedente si
+                                impegna a rimborsare al Cessionario l’importo delle prestazioni
+                                eseguite ai sensi dell’art.
+                                1267 C.C, a semplice richiesta di quest’ultima.
+                            </li>
+                            <li>
+                                Il Cedente si impegna a corrispondere al Cessionario l’importo
+                                complessivo o parziale, a
+                                saldo di quanto dovuto, qualora emergessero contestazioni da parte
+                                della Compagnia
+                                Assicuratrice o nel caso che pagasse solo parzialmente quanto
+                                richiesto dal Cessionario.
+                            </li>
+                            <li>
+                                Qualora da risultanze peritali emergesse l&#39;antieconomicità delle
+                                riparazioni sulle vetture del
+                                Cedente, lo stesso sarà informato preventivamente dal Cessionario e
+                                nel qual caso venga
+                                commissionata egualmente la riparazione, la parte non coperta dalla
+                                polizza dovrà essere
+                                liquidata dal Cedente.
+                            </li>
+                            <li>
+                                Il recesso del Cedente dal presente atto comporta l&#39;obbligo di
+                                rimborsare il Cessionario per
+                                le prestazioni già eseguite, nonché spese già affrontate in
+                                esecuzione del presente
+                                contratto.
+                            </li>
+                            <li> Il Cedente dichiara (in caso di omessa indicazione verrà
+                                considerata IVA non detraibile):<br /> [ ] di <strong>NON DETRARRE
+                                IVA</strong><br /> [ ] di <strong>AVERE DIRITTO ALLA DETRAZIONE
+                                DELL'IVA </strong>per una percentuale pari al ____ % </li>
+                            <li>
+                                Il credito ceduto sarà saldato dalla Compagnia Assicurativa, mentre
+                                la % dell’IVA detraibile
+                                sarà saldata dal Cedente, da pagarsi al Cessionario in intestazione
+                                presso le coordinate
+                                bancarie al momento della ricezione della fattura:
+                            </li>
+                        </ol>
+                    </div>
+                    <br />
+                    <br />
+                    <t t-if="o.company_id.bank_ids">
+                        <div class="signature center">
+                            <t t-out="o.company_id.bank_ids[0].acc_number"></t> - 
+                            <t t-out="o.company_id.bank_ids[0].bank_id.name"></t>
+                        </div>
+                    </t>
+                    <br/>
+                    <br/>
+
+
+                    <table class="table table-condensed delivery_data">
+                        <tr>
+                            <td>
+                                <div
+                                    name="recipient_signature"
+                                    class="text-right"
+                                    style="font-size:16px;"
+                                >
+                                    <strong>Il Cedente</strong> ________________________ </div>
+                            </td>
+                            <td>
+                            <div
+                                name="recipient_signature"
+                                class="text-left"
+                                style="font-size:16px;"
+                            >
+                                <strong>Il Cessionario</strong> ________________________ </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="oe_structure" />
+                </div>
+            </t>
+
+        </template>
+
+        <template id="report_modulo_cessione_credito2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="irontech_insurance_report.report_modulo_cessione_credito" />
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
