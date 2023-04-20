@@ -7,7 +7,7 @@
             <t t-call="web.external_layout">
                 <style>
                     .page{
-                    font-size:15px;
+                    font-size:14px;
                     }
                     .borderline{
                     border: 1px solid black !important;
@@ -27,14 +27,13 @@
                     }
                 </style>
                 <div class="page">
-                    <div class="oe_structure" />
-                    <div style="margin-bottom:30px" class="center">
+                    <div style="margin-top:-30px" class="center">
                         <strong class="signature">
                             ATTO DI CESSIONE DEL CREDITO
                         </strong>
                         <br />
-                        <br />
                         Tra </div>
+                    <br />
                     <div id="introduction">
                         <p> Il/La sottoscritto/a <t t-if="o.insured_name">
                                 <span t-field="o.insured_name" />
@@ -125,9 +124,8 @@
                             PEC <span
                                 t-field="o.company_id.email"></span>, C.F./P.IVA <span
                                 t-field="o.company_id.vat" />, in persona del Legale Rappresentante
-                            protempore, di seguito denominata "Cessionario". </p>
+                            protempore, di seguito denominata "Cessionario".</p>
                     </div>
-                    <br />
                     <br />
                     <div class="center">
                         PREMESSO CHE
@@ -186,11 +184,10 @@
                                         __________________________
                                     </t>
                                     è stata incaricata dal Cessionario di eseguire la riparazione
-                                    del suddetto veicolo. </p>
+                                    del suddetto veicolo.</p>
                             </li>
                         </ol>
                     </div>
-                    <br />
                     <br />
                     <div class="center">
                         SI CONVIENE E STIPULA QUANTO SEGUE
@@ -262,15 +259,15 @@
                         </ol>
                     </div>
                     <br />
-                    <br />
                     <t t-if="o.company_id.bank_ids">
                         <div class="signature center">
-                            <t t-out="o.company_id.bank_ids[0].acc_number"></t> - 
-                            <t t-out="o.company_id.bank_ids[0].bank_id.name"></t>
+                            <t t-out="o.company_id.bank_ids[0].acc_number"></t> - <t
+                                t-out="o.company_id.bank_ids[0].bank_id.name"></t>
                         </div>
                     </t>
                     <br/>
-                    <br/>
+                    <br />
+                    <br />
 
 
                     <table class="table table-condensed delivery_data">
@@ -284,16 +281,15 @@
                                     <strong>Il Cedente</strong> ________________________ </div>
                             </td>
                             <td>
-                            <div
-                                name="recipient_signature"
-                                class="text-left"
-                                style="font-size:16px;"
-                            >
-                                <strong>Il Cessionario</strong> ________________________ </div>
+                                <div
+                                    name="recipient_signature"
+                                    class="text-left"
+                                    style="font-size:16px;"
+                                >
+                                    <strong>Il Cessionario</strong> ________________________ </div>
                             </td>
                         </tr>
                     </table>
-                    <div class="oe_structure" />
                 </div>
             </t>
 
