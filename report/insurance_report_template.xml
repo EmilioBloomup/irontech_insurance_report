@@ -2,6 +2,8 @@
 <odoo>
     <data>
 
+        <!-- REPORT CESSIONE CREDITO -->
+
         <template id="report_modulo_cessione_credito">
             <t t-set="o" t-value="doc" />
             <t t-call="web.external_layout">
@@ -106,12 +108,12 @@
                                 t-field="o.company_id.street" />
                                 <span
                                 t-field="o.company_id.street2" /> - <span
-                                t-field="o.company_id.city" /> , e sede operativa in <t
+                                t-field="o.company_id.city" /> <span t-field="o.company_id.zip"/>, e sede operativa in <t
                                 t-if="o.company_id.partner_id.operative_office">
                                 <span t-field="o.company_id.partner_id.operative_office.street" />
                                 <span
                                     t-field="o.company_id.partner_id.operative_office.street2" /> - <span
-                                    t-field="o.company_id.partner_id.operative_office.city" />
+                                    t-field="o.company_id.partner_id.operative_office.city" /> <span t-field="o.company_id.partner_id.operative_office.zip"/>
                             </t>
                                 <t
                                 t-if="not o.company_id.partner_id.operative_office">
@@ -119,7 +121,7 @@
                                     t-field="o.company_id.street" />
                                 <span
                                     t-field="o.company_id.street2" /> - <span
-                                    t-field="o.company_id.city" />
+                                    t-field="o.company_id.city" /> <span t-field="o.company_id.zip"/>
                             </t>,
                             PEC <span
                                 t-field="o.company_id.email"></span>, C.F./P.IVA <span
@@ -265,7 +267,7 @@
                                 t-out="o.company_id.bank_ids[0].bank_id.name"></t>
                         </div>
                     </t>
-                    <br/>
+                    <br />
                     <br />
                     <br />
 
@@ -302,5 +304,418 @@
                 </t>
             </t>
         </template>
+
+
+        <!-- REPORT RESTITUZIONE VEICOLO -->
+
+        <template id="report_modulo_restituzione_veicolo">
+            <t t-set="o" t-value="doc" />
+            <t t-call="web.external_layout">
+                <style>
+                    .page{
+                    font-size:14px;
+                    }
+                    .borderline{
+                    border: 1px solid black !important;
+                    }
+                    .background{
+                    background-color: #C0C0C0;
+                    }
+                    .center {
+                    text-align:center;
+                    font-weight: bold;
+                    }
+                    .spanname{
+                    font-weight:bold;
+                    }
+                    .pad{
+                    padding-left:5px;
+                    }
+                </style>
+                <div class="page">
+                    <div class="center">
+                        <br />
+                        <br />
+                        <strong class="signature">
+                            RESTITUZIONE VEICOLO RIPARATO
+                        </strong>
+                        <br />
+                        <br />
+                    </div>
+                    <br />
+                    <div id="introduction">
+                        <p> Il/La sottoscritto/a <t t-if="o.insured_name">
+                                <span t-field="o.insured_name" />
+                            </t>
+                            <t
+                                t-if="not o.insured_name">
+                                ______________________
+                            </t>
+                    , in proprio / in qualità di legale rappresentante di _______________________,
+                    nato/a _______________________ il ______________________ , residente in <t
+                                t-if="o.insured_id.city">
+                                <span t-field="o.insured_id.city" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.city">
+                                ____________________
+                            </t>
+                    via <t t-if="o.insured_id.address">
+                                <span t-field="o.insured_id.address" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.address">
+                                ____________________
+                            </t>
+                    , CAP <t t-if="o.insured_id.cap">
+                                <span t-field="o.insured_id.cap" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.cap">
+                                ____________________
+                            </t>
+                            <t
+                                t-if="o.insured_id.partner_id.is_company"> P.IVA <t
+                                    t-if="o.insured_id.partner_id.vat">
+                                    <span t-field="o.insured_id.vat" />
+                                </t>
+                                <t
+                                    t-if="not o.insured_id.partner_id.vat">
+                                    ________________________
+                                </t>
+                            </t>
+                            <t
+                                t-if="not o.insured_id.partner_id.is_company"> C.F. <t
+                                    t-if="o.insured_id.cf">
+                                    <span t-field="o.insured_id.cf" />
+                                </t>    
+                            <t
+                                    t-if="not o.insured_id.cf">
+                                    ___________________________
+                                </t>
+
+                            </t>
+                        </p>
+                    </div>
+                    <br />
+                    <div
+                        class="center">
+                        DICHIARA
+                    </div>
+                    <br />
+                    <br />
+                    <div
+                        id="company_info">
+                        <p> di ritirare il proprio veicolo marca/modello <t
+                                t-if="o.datbrand">
+                                <span t-field="o.datbrand" />
+                                <span t-field="o.vehicle" />
+                            </t>
+                                <t
+                                t-if="not o.datbrand">
+                                __________________________
+                            </t>
+                    targato <t
+                                t-if="o.vehicle_plate">
+                                <span t-field="o.vehicle_plate" />
+                            </t>
+                                <t
+                                t-if="not o.vehicle_plate">
+                                __________________________
+                            </t>
+                    dalla carrozzeria <t
+                                t-if="o.body_repair_shop_id">
+                                <span t-field="o.body_repair_shop_id.name" />
+                            </t>
+                                <t
+                                t-if="not o.body_repair_shop_id">
+                                __________________________
+                            </t>
+                    con sede in <t
+                                t-if="o.body_repair_shop_id.street">
+                                <span t-field="o.body_repair_shop_id.street" /> 
+                                    <span
+                                    t-field="o.body_repair_shop_id.street2" /> - <span
+                                    t-field="o.body_repair_shop_id.city" />, <span
+                                    t-field="o.body_repair_shop_id.state_id" />
+                            </t>
+                                <t
+                                t-if="not o.body_repair_shop_id">
+                                __________________________
+                            </t>
+                        </p>
+                    </div>
+                    <br />
+                    <div
+                        class="center">
+                        E RICONOSCE
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                    che è stata eseguita riparazione a regola d'arte e nulla vanta nei confronti di
+                    ogni attore coinvolto.
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div>
+                    Luogo e Data
+                    </div>
+                    <br />
+                    _____________________ <br />
+                    <br />
+                    <br />
+                    <br />
+                    <table
+                        class="table table-condensed delivery_data">
+                        <tr>
+                            <td>
+                                <div
+                                    name="recipient_signature"
+                                    class="text-right"
+                                    style="font-size:16px;"
+                                >
+                                    <strong>Il Cliente </strong> ________________________ </div>
+                            </td>
+                            <td>
+                                <div
+                                    name="recipient_signature"
+                                    class="text-left"
+                                    style="font-size:16px;"
+                                >
+                                    <strong>La Carrozzeria </strong> ________________________ </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+
+        </template>
+
+        <template id="report_modulo_restituzione_veicolo2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="irontech_insurance_report.report_modulo_restituzione_veicolo" />
+                </t>
+            </t>
+        </template>
+
+
+        <!-- REPORT PRESA IN CARICO -->
+
+        <template id="report_modulo_presa_in_carico">
+            <t t-set="o" t-value="doc" />
+            <t t-call="web.external_layout">
+                <style>
+                    .page{
+                    font-size:14px;
+                    }
+                    .borderline{
+                    border: 1px solid black !important;
+                    }
+                    .background{
+                    background-color: #C0C0C0;
+                    }
+                    .center {
+                    text-align:center;
+                    font-weight: bold;
+                    }
+                    .spanname{
+                    font-weight:bold;
+                    }
+                    .pad{
+                    padding-left:5px;
+                    }
+                </style>
+                <div class="page">
+                    <div class="center">
+                        <br />
+                        <br />
+                        <strong class="signature">
+                            PRESA IN CARICO VEICOLO PER LA RIPARAZIONE
+                        </strong>
+                        <br />
+                        <br />
+                    </div>
+                    <br />
+                    <div id="introduction">
+                        <p> Il/La sottoscritto/a <t t-if="o.insured_name">
+                                <span t-field="o.insured_name" />
+                            </t>
+                            <t
+                                t-if="not o.insured_name">
+                                ______________________
+                            </t>
+                    , in proprio / in qualità di legale rappresentante di _______________________,
+                    nato/a _______________________ il ______________________ , residente in <t
+                                t-if="o.insured_id.city">
+                                <span t-field="o.insured_id.city" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.city">
+                                ____________________
+                            </t>
+                    via <t t-if="o.insured_id.address">
+                                <span t-field="o.insured_id.address" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.address">
+                                ____________________
+                            </t>
+                    , CAP <t t-if="o.insured_id.cap">
+                                <span t-field="o.insured_id.cap" />
+                            </t>
+                            <t
+                                t-if="not o.insured_id.cap">
+                                ____________________
+                            </t>
+                            <t
+                                t-if="o.insured_id.partner_id.is_company"> P.IVA <t
+                                    t-if="o.insured_id.partner_id.vat">
+                                    <span t-field="o.insured_id.vat" />
+                                </t>
+                                <t
+                                    t-if="not o.insured_id.partner_id.vat">
+                                    ________________________
+                                </t>
+                            </t>
+                            <t
+                                t-if="not o.insured_id.partner_id.is_company"> C.F. <t
+                                    t-if="o.insured_id.cf">
+                                    <span t-field="o.insured_id.cf" />
+                                </t>    
+                            <t
+                                    t-if="not o.insured_id.cf">
+                                    ___________________________
+                                </t>
+
+                            </t>
+                        </p>
+                    </div>
+                    <br />
+                    <div
+                        class="center">
+                        DICHIARA
+                    </div>
+                    <br />
+                    <br />
+                    <div
+                        id="company_info">
+                        <p> di consegnare il proprio veicolo marca/modello <t
+                                t-if="o.datbrand">
+                                <span t-field="o.datbrand" />
+                                <span t-field="o.vehicle" />
+                            </t>
+                                <t
+                                t-if="not o.datbrand">
+                                __________________________
+                            </t>
+                    targato <t
+                                t-if="o.vehicle_plate">
+                                <span t-field="o.vehicle_plate" />
+                            </t>
+                                <t
+                                t-if="not o.vehicle_plate">
+                                __________________________
+                            </t>
+                    dalla carrozzeria <t
+                                t-if="o.body_repair_shop_id">
+                                <span t-field="o.body_repair_shop_id.name" />
+                            </t>
+                                <t
+                                t-if="not o.body_repair_shop_id">
+                                __________________________
+                            </t>
+                    con sede in <t
+                                t-if="o.body_repair_shop_id.street">
+                                <span t-field="o.body_repair_shop_id.street" /> 
+                                    <span
+                                    t-field="o.body_repair_shop_id.street2" /> - <span
+                                    t-field="o.body_repair_shop_id.city" />, <span
+                                    t-field="o.body_repair_shop_id.state_id" />
+                            </t>
+                                <t
+                                t-if="not o.body_repair_shop_id">
+                                __________________________
+
+                            </t>
+                    per la riparazione del suddetto in rif. al sx n° 
+                    <t t-if="o.accident_number">
+                        <span t-field="o.accident_number"></span>
+                    </t>
+                    <t t-if="not o.accident_number">
+                    _____________________ 
+                    </t>
+                    , in carico alla ditta 
+                    <span t-field="o.company_id.name" /> , con sede legale in <span
+                                t-field="o.company_id.street" />
+                                <span
+                                t-field="o.company_id.street2" /> - <span
+                                t-field="o.company_id.city" /> - <span t-field="o.company_id.zip"/>, e sede operativa in <t
+                                t-if="o.company_id.partner_id.operative_office">
+                                <span t-field="o.company_id.partner_id.operative_office.street" />
+                                <span
+                                    t-field="o.company_id.partner_id.operative_office.street2" /> - <span
+                                    t-field="o.company_id.partner_id.operative_office.city" /> - <span t-field="o.company_id.partner_id.operative_office.zip"/>
+                            </t>
+                                <t
+                                t-if="not o.company_id.partner_id.operative_office">
+                                <span
+                                    t-field="o.company_id.street" />
+                                <span
+                                    t-field="o.company_id.street2" /> - <span
+                                    t-field="o.company_id.city" /> - <span t-field="o.company_id.zip"/>
+                            </t>
+                    </p>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div>
+                    Luogo e Data
+                    </div>
+                    <br />
+                    _____________________ <br />
+                    <br />
+                    <br />
+                    <br />
+                    <table
+                        class="table table-condensed delivery_data">
+                        <tr>
+                            <td>
+                                <div
+                                    name="recipient_signature"
+                                    class="text-right"
+                                    style="font-size:16px;"
+                                >
+                                    <strong>Il Cliente </strong> ________________________ </div>
+                            </td>
+                            <td>
+                                <div
+                                    name="recipient_signature"
+                                    class="text-left"
+                                    style="font-size:16px;"
+                                >
+                                    <strong>La Carrozzeria </strong> ________________________ </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+
+        </template>
+
+        <template id="report_modulo_presa_in_carico2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="irontech_insurance_report.report_modulo_presa_in_carico" />
+                </t>
+            </t>
+        </template>
+
     </data>
 </odoo>
